@@ -19,6 +19,7 @@ html, body {width:100%;height:100%;}
 #posts {
     position: absolute;
     padding: 0;
+    margin: 0;
     background-color:rgba(25,25,25,0.7);
 }
 .post {
@@ -27,9 +28,8 @@ html, body {width:100%;height:100%;}
     background-color:{BackgroundColor};
 }
 li{list-style-type: none;}
-.navi {margin: 2px 10px 2px 10px;}
+.navi a {margin: 0px 10px;}
 .navi span {display: inline-block;}
-.navi a {color:#fff;}
 </style>
 <body>
   <div class="header">
@@ -42,25 +42,25 @@ li{list-style-type: none;}
       <h3>
         <a href="{Permalink}">{Title}</a>
       </h3>{/block:Title}{Body}
-    </li>{/block:Text}{block:Photo} 
+    {/block:Text}{block:Photo} 
     <li class="post photo">
       <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>{block:Caption} 
       <div class="caption">{Caption}</div>{/block:Caption}
-    </li>{/block:Photo}{block:Panorama} 
+    {/block:Photo}{block:Panorama} 
     <li class="post panorama">{LinkOpenTag} 
       <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>{LinkCloseTag}{block:Caption} 
       <div class="caption">{Caption}</div>{/block:Caption}
-    </li>{/block:Panorama}{block:Photoset} 
+    {/block:Panorama}{block:Photoset} 
     <li class="post photoset">{Photoset-500}{block:Caption} 
       <div class="caption">{Caption}</div>{/block:Caption}
-    </li>{/block:Photoset}{block:Quote} 
+    {/block:Photoset}{block:Quote} 
     <li class="post quote">"{Quote}" {block:Source} 
       <div class="source">{Source}</div>{/block:Source}
-    </li>{/block:Quote}{block:Link} 
+    {/block:Quote}{block:Link} 
     <li class="post link">
       <a href="{URL}" class="link" {Target}>{Name}</a>{block:Description}
       <div class="description">{Description}</div>{/block:Description}
-    </li>{/block:Link}{block:Chat} 
+    {/block:Link}{block:Chat} 
     <li class="post chat">{block:Title} 
       <h3>
         <a href="{Permalink}">{Title}</a>
@@ -70,19 +70,20 @@ li{list-style-type: none;}
           <span class="label">{Label}</span>{/block:Label}{Line}
         </li>{/block:Lines} 
       </ul>
-    </li>{/block:Chat}{block:Video} 
+    {/block:Chat}{block:Video} 
     <li class="post video">{Video-500}{block:Caption} 
       <div class="caption">{Caption}</div>{/block:Caption}
-    </li>{/block:Video}{block:Audio} 
+    {/block:Video}{block:Audio} 
     <li class="post audio">{AudioEmbed}{block:Caption} 
       <div class="caption">{Caption}</div>{/block:Caption}
-    </li>{/block:Audio}
+    {/block:Audio}
     <div class="navi">
-        <span>{LikeButton}</span>
-        <span>{ReblogButton}</span>
+        <span>{LikeButton color="black"}</span>
+        <span>{ReblogButton color="black"}</span>
         <a href="{permalink}" target="_blank">{block:NoteCount}{NoteCountWithLabel}{/block:NoteCount}</a>
         {block:HasTags}{block:Tags}<a href="{TagURL}" class="tags_URL">#{Tag}</a> {/block:Tags}{/block:HasTags}
     </div>
+    </li>
     {/block:Posts} 
   </ol>
   <p id="footer">{block:PreviousPage} 
@@ -95,15 +96,18 @@ li{list-style-type: none;}
         {block:ifheader2image}"{image:header2}",{block:ifheader2image}
         {block:ifheader3image}"{image:header3}"{block:ifheader3image}
     ], {duration: 2000, fade: 750});
-  
+    var TumblrPageNumber = {CurrentPage};
     $('#posts').infinitescroll({
       navSelector: "p#footer",
       nextSelector: "a#next_page",
       itemSelector: "#posts li",
       loading:{
           img:"http://static.tumblr.com/ixgffff/Q1Tnrsaol/ajax-loader.gif",
-          msgText: ""
+          msgText: "",
       }, 
+    }, function(e) {
+        TumblrPageNumber++;
+        Tumblr.LikeButton.get_status_by_page(TumblrPageNumber);
     });
   </script>
 </body>
