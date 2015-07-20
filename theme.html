@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>{Title}{block:PermalinkPage}{block:PostSummary}/{PostSummary}{/block:PostSummary}{/block:PermalinkPage}</title>
+
+<meta name="viewport" id="viewport" content="user-scalable=0;initial-scale=1.0, maximum-scale=1.0">
+<link rel="shortcut icon" href="{Favicon}" />
+<link rel="alternate" type="application/rss+xml" href="{RSS}">
+
+<meta name="image:Header1" content=""/>
+<meta name="image:Header2" content="">
+<meta name="image:Header3" content="">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.3/jquery.backstretch.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.0b2.120519/jquery.infinitescroll.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
+
+<style>
+.header {display:table; height:100%; width:100%; }
+.title {text-align: center; vertical-align: middle; display:table-cell;}
+.title a {text-decoration: none;color:#eee;font-size:55pt;font-family: {TitleFont};}
+html, body {width:100%;height:100%;}
+#posts {
+    position: absolute;
+    padding: 0;
+    background-color:rgba(25,25,25,0.7);
+}
+.post {
+    margin: 10px 10px 0px 10px;
+    padding: 10px;
+    background-color:{BackgroundColor};
+}
+li{list-style-type: none;}
+</style>
+
+<body>
+  <div class="header">
+    <div class="title"><a href="/">{Title}</a></div>
+  </div>
+  <ol id="posts">
+    {block:Posts}{block:Text}
+        <li class="post text">
+            {block:Title}
+                <h3><a href="{Permalink}">{Title}</a></h3>
+            {/block:Title}{Body}
+        </li>
+    {/block:Text}{block:Photo}
+        <li class="post photo">
+            <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
+
+            {block:Caption}
+                <div class="caption">{Caption}</div>
+            {/block:Caption}
+        </li>
+    {/block:Photo}{block:Panorama}
+        <li class="post panorama">
+            {LinkOpenTag}
+                <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>
+            {LinkCloseTag}{block:Caption}
+                <div class="caption">{Caption}</div>
+            {/block:Caption}
+        </li>
+    {/block:Panorama}{block:Photoset}
+        <li class="post photoset">
+            {Photoset-500}{block:Caption}
+                <div class="caption">{Caption}</div>
+            {/block:Caption}
+        </li>
+    {/block:Photoset}{block:Quote}
+        <li class="post quote">
+            "{Quote}"
+
+            {block:Source}
+                <div class="source">{Source}</div>
+            {/block:Source}
+        </li>
+    {/block:Quote}{block:Link}
+        <li class="post link">
+            <a href="{URL}" class="link" {Target}>{Name}</a>
+
+            {block:Description}
+                <div class="description">{Description}</div>
+            {/block:Description}
+        </li>
+    {/block:Link}{block:Chat}
+        <li class="post chat">
+            {block:Title}
+                <h3><a href="{Permalink}">{Title}</a></h3>
+            {/block:Title}
+
+            <ul class="chat">
+                {block:Lines}
+                    <li class="{Alt} user_{UserNumber}">
+                        {block:Label}
+                            <span class="label">{Label}</span>
+                        {/block:Label}{Line}
+                    </li>
+                {/block:Lines}
+            </ul>
+        </li>
+    {/block:Chat}{block:Video}
+        <li class="post video">
+            {Video-500}{block:Caption}
+                <div class="caption">{Caption}</div>
+            {/block:Caption}
+        </li>
+    {/block:Video}{block:Audio}
+        <li class="post audio">
+            {AudioEmbed}{block:Caption}
+                <div class="caption">{Caption}</div>
+            {/block:Caption}
+        </li>
+    {/block:Audio}{/block:Posts}
+  </ol>
+  
+  <p id="footer">
+    {block:PreviousPage}
+        <a id="prev_page" href="{PreviousPage}">&#171; Previous</a>
+    {/block:PreviousPage}{block:NextPage}
+        <a id="next_page" href="{NextPage}">Next &#187;</a>
+    {/block:NextPage}
+  </p>
+
+  <script type="text/javascript">
+    $.backstretch([
+        {block:ifheader1image}"{image:header1}",{/block:ifheader1image}
+        {block:ifheader2image}"{image:header2}",{block:ifheader2image}
+        {block:ifheader3image}"{image:header3}"{block:ifheader3image}
+    ], {duration: 2000, fade: 750});
+  
+    $('#posts').infinitescroll({
+      navSelector: "p#footer",
+      nextSelector: "a#next_page",
+      itemSelector: "#posts li",
+      loading:{
+          img:"http://static.tumblr.com/ixgffff/Q1Tnrsaol/ajax-loader.gif",
+          msgText: ""
+      }, 
+    });
+  
+  </script>
+</body>
+</html>
