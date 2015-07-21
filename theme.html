@@ -4,9 +4,7 @@
 <meta name="viewport" id="viewport" content="user-scalable=0;initial-scale=1.0, maximum-scale=1.0">
 <link rel="shortcut icon" href="{Favicon}" />
 <link rel="alternate" type="application/rss+xml" href="{RSS}">
-<meta name="image:Header1" content=""/>
-<meta name="image:Header2" content="">
-<meta name="image:Header3" content="">
+<meta name="image:Header1" content="http://static.tumblr.com/ixgffff/Vtinrubnp/09595d73.gif"/>
 <meta name="color:Post Background Color" content="#ccc" />
 <meta name="color:Post Content Color" content="#222" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -103,8 +101,10 @@ li{list-style-type: none;}
   <script type="text/javascript">
     $.backstretch([
         {block:ifheader1image}"{image:header1}",{/block:ifheader1image}
-        {block:ifheader2image}"{image:header2}",{block:ifheader2image}
-        {block:ifheader3image}"{image:header3}"{block:ifheader3image}
+        {block:Posts}
+        {block:Photo}"{PhotoURL-500}",{/block:Photo}
+        {block:Photoset}{block:Photos}"{PhotoURL-500}",{/block:Photos}{/block:Photoset}
+        {/block:Posts}
     ], {duration: 2000, fade: 750});
     var TumblrPageNumber = {CurrentPage};
     $('#posts').infinitescroll({
