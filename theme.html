@@ -95,10 +95,10 @@ html, body {width:100%;height:100%;}
     </li>
     {/block:Posts} 
   </ol>
-  <p id="footer">{block:PreviousPage} 
+  <div id="footer">{block:PreviousPage} 
     <a id="prev_page" href="{PreviousPage}">&#171; Previous</a>{/block:PreviousPage}{block:NextPage}
     <a id="next_page" href="{NextPage}">Next &#187;</a>{/block:NextPage}
-  </p>
+  </div>
   <script type="text/javascript">
     $.backstretch([
         {block:ifheader1image}"{image:header1}",{/block:ifheader1image}
@@ -110,9 +110,9 @@ html, body {width:100%;height:100%;}
     ], {duration: 2000, fade: 750});
     var TumblrPageNumber = {CurrentPage};
     $('#posts').infinitescroll({
-      navSelector: "p#footer",
+      navSelector: "div#footer",
       nextSelector: "a#next_page",
-      itemSelector: "#posts li",
+      itemSelector: "#posts li.post",
       loading:{
           img:"http://static.tumblr.com/ixgffff/Q1Tnrsaol/ajax-loader.gif",
           msgText: "",
