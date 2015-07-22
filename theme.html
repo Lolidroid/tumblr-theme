@@ -35,6 +35,30 @@ html, body {width:100%;height:100%;}
     background-color:rgba({RGBcolor:Post Background Color},0.6);
     color:{color:Post Content Color};
 }
+.post-footer {
+  clear: both;
+  display: table;
+  position: relative;
+  width: 100%;
+}
+.date-notes {display: table-cell; vertical-align: middle;}
+.post-controls {
+  display: table-cell;
+  vertical-align: middle;
+  min-width: 150px;
+}
+.post-controls .controls-wrapper {
+  text-align: right;
+  margin-right: 20px;
+}
+.post-controls .control {
+  margin: 3px 0 0 15px;
+  opacity: .355;
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  vertical-align: middle;
+}
 .navi a {margin: 0px 10px;}
 .navi span {display: inline-block;}
 #infscr-loading{margin: 0 auto; width: 360px; text-align: center;}
@@ -86,12 +110,20 @@ html, body {width:100%;height:100%;}
     <li class="post audio">{AudioEmbed}{block:Caption} 
       <div class="caption">{Caption}</div>{/block:Caption}
     {/block:Audio}
-    <div class="navi">
-        <span>{LikeButton color="black"}</span>
-        <span>{ReblogButton color="black"}</span>
-        <a href="{permalink}" target="_blank">{block:NoteCount}{NoteCountWithLabel}{/block:NoteCount}</a>
-        {block:HasTags}{block:Tags}<a href="{TagURL}" class="tags_URL">#{Tag}</a> {/block:Tags}{/block:HasTags}
-    </div>
+        <div class="post-footer">
+        　<section class="inline-meta date-notes">
+        　  <div class="date-note-wrapper">
+              {block:NoteCount}<a href="{Permalink}#notes" class="meta-item post-notes">{NoteCountWithLabel}</a>{/block:NoteCount}
+              <a href="{Permalink}" title="{TimeAgo}" class="meta-item post-date">{ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}</a>
+            </div>
+        　</section>
+        　<section class="post-controls">
+            <div class="controls-wrapper">
+              <div class="control reblog-control">{ReblogButton size="21" color="black"}</div>
+              <div class="control like-control">{LikeButton size="20" color="black"}</div>
+            </div>
+          </section>
+        </div>
     </li>
     {/block:Posts} 
   </ol>
