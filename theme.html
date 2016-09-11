@@ -1,161 +1,89 @@
 <!DOCTYPE html>
 <meta charset='UTF-8'>
-<title>{Title}{block:PermalinkPage}{block:PostSummary}/{PostSummary}{/block:PostSummary}{/block:PermalinkPage}</title>
-<meta name="viewport" id="viewport" content="user-scalable=0;initial-scale=1.0, maximum-scale=1.0">
-<link rel="shortcut icon" href="{Favicon}" />
-<link rel="alternate" type="application/rss+xml" href="{RSS}">
-<meta name="image:Header1" content="http://static.tumblr.com/ixgffff/Vtinrubnp/09595d73.gif"/>
-<meta name="color:Post Background Color" content="#ccc" />
-<meta name="color:Post Content Color" content="#222" />
-<meta name="color:Title Color" content="#eee" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.3/jquery.backstretch.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.0b2.120519/jquery.infinitescroll.min.js"></script>
-<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
+<title>{Title}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="//yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
+<link rel="stylesheet" href="http://static.tumblr.com/ixgffff/XbDo92q34/loading.css">
+
 <style>
-.header {display:table; height:100%; width:100%; }
-.title {text-align: center; vertical-align: middle; display:table-cell;}
-.title a {text-decoration: none; color: {color:Title Color}; font-size:55pt; font-family: {TitleFont};}
-html, body {width:100%;height:100%;}
-#posts {
-  position: absolute;
-  padding: 0;
-  margin: 0;
-  background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.84) 10%, rgba(0,0,0,0.84) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(10%,rgba(0,0,0,0.84)), color-stop(100%,rgba(0,0,0,0.84)));
-  background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.84) 10%,rgba(0,0,0,0.84) 100%);
-  background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.84) 10%,rgba(0,0,0,0.84) 100%);
-  background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.84) 10%,rgba(0,0,0,0.84) 100%);
-  background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.84) 10%,rgba(0,0,0,0.84) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#d6000000',GradientType=0 );
+* {
+    font-family: Meiryo, sans-serif;
 }
-.post {
-  margin: 10px 10px 0px 10px;
-  padding: 10px;
-  background-color:rgba({RGBcolor:Post Background Color},0.6);
-  color:{color:Post Content Color};
+.loading {z-index: 100;}
+.full-window {
+    width: 100vw;
+    height: 100vh;
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display: -webkit-flex;
+    display:flex;
+    -webkit-box-align:center;
+    -ms-flex-align:center;
+    -webkit-align-items:center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    flex-direction: column; 
 }
-.post-footer {
-  clear: both;
-  display: table;
-  position: relative;
-  width: 100%;
+.title {font-size:70px;cursor: pointer; display: none;}
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
-.date-notes {display: table-cell; vertical-align: middle;}
-.post-controls {
-  display: table-cell;
-  vertical-align: middle;
-  min-width: 150px;
+.profile { 
+    -webkit-transition: all 2s;
+    -moz-transition: all 2s;
+    -ms-transition: all 2s;
+    -o-transition: all 2s;
+    transition: all 2s;
+    opacity: 0;
 }
-.post-controls .controls-wrapper {
-  text-align: right;
-  margin-right: 20px;
+.profile-fade {opacity: 1;}
+.shadow {background: #FFF; opacity: .8; display: none; z-index: -1;} 
+.footer {
+    position: fixed;
+    right: 20px;
+    bottom:20px;
 }
-.post-controls .control {
-  margin: 3px 0 0 15px;
-  opacity: .355;
-  display: inline-block;
-  position: relative;
-  text-align: left;
-  vertical-align: middle;
-}
-.post blockquote {
-  border-left: 3px solid rgba(0,0,0,0.3);
-  margin: 1em 0;
-  padding-left: 10px;
-}
-.navi a {margin: 0px 10px;}
-.navi span {display: inline-block;}
-#infscr-loading{margin: 0 auto; width: 360px; text-align: center;}
-{CustomCSS}
+strong {font-weight: bold;}
+p {margin-top: 15px;}
 </style>
-<body>
-  <div class="header">
-    <div class="title">
-      <a href="/">{Title}</a>
+
+<div class="loading full-window overlay">
+    <div id="fountainTextG"><div id="fountainTextG_1" class="fountainTextG">L</div><div id="fountainTextG_2" class="fountainTextG">o</div><div id="fountainTextG_3" class="fountainTextG">a</div><div id="fountainTextG_4" class="fountainTextG">d</div><div id="fountainTextG_5" class="fountainTextG">i</div><div id="fountainTextG_6" class="fountainTextG">n</div><div id="fountainTextG_7" class="fountainTextG">g</div><div id="fountainTextG_8" class="fountainTextG">.</div><div id="fountainTextG_9" class="fountainTextG">.</div><div id="fountainTextG_10" class="fountainTextG">.</div></div>
+</div>
+
+<div id="wrapper" class="full-window">
+    <div class="overlay shadow toggle-profile"></div>
+    <div>
+        <center><img src="https://twitter.com/Lolidroid/profile_image?size=bigger" class="profile"></center>
+        <h1 class="title toggle-profile" >{Title}</h1>
+        <p class="profile">{Description}</p>
     </div>
-  </div>
-  <ol id="posts">{block:Posts}{block:Text} 
-    <li class="post text">{block:Title} 
-      <h3>
-        <a href="{Permalink}">{Title}</a>
-      </h3>{/block:Title}{Body}
-    {/block:Text}{block:Photo} 
-    <li class="post photo">
-      <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>{block:Caption} 
-      <div class="caption">{Caption}</div>{/block:Caption}
-    {/block:Photo}{block:Panorama} 
-    <li class="post panorama">{LinkOpenTag} 
-      <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>{LinkCloseTag}{block:Caption} 
-      <div class="caption">{Caption}</div>{/block:Caption}
-    {/block:Panorama}{block:Photoset} 
-    <li class="post photoset">{Photoset-500}{block:Caption} 
-      <div class="caption">{Caption}</div>{/block:Caption}
-    {/block:Photoset}{block:Quote} 
-    <li class="post quote">"{Quote}" {block:Source} 
-      <div class="source">{Source}</div>{/block:Source}
-    {/block:Quote}{block:Link} 
-    <li class="post link">
-      <a href="{URL}" class="link" {Target}>{Name}</a>{block:Description}
-      <div class="description">{Description}</div>{/block:Description}
-    {/block:Link}{block:Chat} 
-    <li class="post chat">{block:Title} 
-      <h3>
-        <a href="{Permalink}">{Title}</a>
-      </h3>{/block:Title} 
-      <ul class="chat">{block:Lines} 
-        <li class="{Alt} user_{UserNumber}">{block:Label} 
-          <span class="label">{Label}</span>{/block:Label}{Line}
-        </li>{/block:Lines} 
-      </ul>
-    {/block:Chat}{block:Video} 
-    <li class="post video">{Video-500}{block:Caption} 
-      <div class="caption">{Caption}</div>{/block:Caption}
-    {/block:Video}{block:Audio} 
-    <li class="post audio">{AudioEmbed}{block:Caption} 
-      <div class="caption">{Caption}</div>{/block:Caption}
-    {/block:Audio}
-      <div class="post-footer">
-        <section class="inline-meta date-notes">
-          <div class="date-note-wrapper">
-            {block:NoteCount}<a href="{Permalink}#notes" class="meta-item post-notes">{NoteCountWithLabel}</a>{/block:NoteCount}
-            <a href="{Permalink}" title="{TimeAgo}" class="meta-item post-date">{ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}</a>
-          </div>
-        </section>
-        <section class="post-controls">
-          <div class="controls-wrapper">
-            <div class="control reblog-control">{ReblogButton size="21" color="black"}</div>
-            <div class="control like-control">{LikeButton size="20" color="black"}</div>
-          </div>
-        </section>
-      </div>
-    </li>
-    {/block:Posts} 
-  </ol>
-  <div id="footer">{block:PreviousPage} 
-    <a id="prev_page" href="{PreviousPage}">&#171; Previous</a>{/block:PreviousPage}{block:NextPage}
-    <a id="next_page" href="{NextPage}">Next &#187;</a>{/block:NextPage}
-  </div>
-  <script type="text/javascript">
-    $.backstretch([
-      {block:ifheader1image}"{image:header1}",{/block:ifheader1image}
-      "{HeaderImage}",
-      {block:Posts}
-      {block:Photo}"{PhotoURL-500}",{/block:Photo}
-      {block:Photoset}{block:Photos}"{PhotoURL-500}",{/block:Photos}{/block:Photoset}
-      {/block:Posts}
-    ], {duration: 2000, fade: 750});
-    $('#posts').infinitescroll({
-      navSelector: "div#footer",
-      nextSelector: "a#next_page",
-      itemSelector: "#posts li.post",
-      loading:{
-        img:"http://static.tumblr.com/ixgffff/Q1Tnrsaol/ajax-loader.gif",
-        msgText: "",
-      },
-    }, function(e,opts) {
-      Tumblr.LikeButton.get_status_by_page(opts.state.currPage);
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+<script type="text/javascript">
+    $('#wrapper').backstretch(
+    [
+        {block:Posts}
+        {block:Photo}"{PhotoURL-500}",{/block:Photo}
+        {block:Photoset}{block:Photos}"{PhotoURL-500}",{/block:Photos}{/block:Photoset}
+        {/block:Posts}
+    ]
+    ,{fade:750,duration: 2000, centeredY: false});
+
+    $(window).one("backstretch.after", function (e, instance, index) {
+        $('.loading').fadeOut();
+        $('.title').fadeIn();
     });
-  </script>
-</body>
-</html>
+    
+    $('.toggle-profile').click(function(){
+        $('.profile').toggleClass('profile-fade');
+        $('.shadow').fadeToggle(2000);
+    });
+</script>
