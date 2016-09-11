@@ -1,5 +1,5 @@
 # tumblr-theme
-A theme for http://yu-gata.tumblr.com/
+A theme for lolidroid.com
 
 ## License
 free license
